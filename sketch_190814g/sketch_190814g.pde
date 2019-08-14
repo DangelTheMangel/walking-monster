@@ -1,3 +1,4 @@
+// dette definer figuren alien
 PShape alien, head, body;
 float rad = 24;
 
