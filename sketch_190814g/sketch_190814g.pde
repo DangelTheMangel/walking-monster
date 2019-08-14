@@ -44,12 +44,14 @@ frameRate(30);
 void draw() {
   //giver farve til bagrund
   background(204);
+  // dette bestemmer størrelsen
 scale(s);
+
+// tegner alien og bestemmer hvor den skal være
   alien.translate(circleX,  circleY);
-  shape(alien); // Draw the group
+  shape(alien); 
 
-  // BEVÆGLSE AF BOLDEN
-
+// gøre alien støre 
     s= s * 1.1;
     
     if(circleY == 1){
