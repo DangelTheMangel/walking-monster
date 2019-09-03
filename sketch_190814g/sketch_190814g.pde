@@ -1,6 +1,5 @@
 // dette definer figuren alien
 PShape alien, head, body;
-float rad = 24;
 
 // dette er de to radiuser vi bruger til opbygningen af alien
 float rad = 24;
@@ -12,7 +11,6 @@ float s = 1;
 // dette er kodinaterne hos alien
 float circleX = 0;
 float circleY = 1;
-float circleY = 10;
 
 void setup() {
   size(600, 600);
