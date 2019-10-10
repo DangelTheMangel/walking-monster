@@ -1,83 +1,48 @@
-// dette definer figuren alien
-PShape alien, head, body;
-float rad = 24;
+float s = 25;
+int  ballX             = 0, ballY            = 0;
+int   speedX            = 1, speedY             = 1;
+float zoomfacktor = 1.01;
 
-// dette er de to radiuser vi bruger til opbygningen af alien
-float rad = 24;
-float radA = 30;
-
-// s er sørtelsen på alienen
-float s = 1;
-
-// dette er kodinaterne hos alien
-float circleX = 0;
-float circleY = 1;
-float circleY = 10;
 
 void setup() {
   size(600, 600);
-frameRate(30);
-  // Create the shape group
-  size(300, 300);
-  //sætter framraten så man kan se hvad der sker. 
-  frameRate(10);
-  
-  // laver en gruppe af figure kalder den alien fordi jeg ikke kan stave til monster på engelsk
-  alien = createShape(GROUP);
-
-  // Make two shapes
-  // laver hovedet og kroppen på monsteret
-  ellipseMode(CORNER);
-  head = createShape(ELLIPSE, -25, 0, rad, rad);
-  // dette er farven på hovdet
-  head.setFill(color(255));
-  body = createShape(ELLIPSE, -25, 24, rad, radA);
-  //dette er farven på kroppen
-  body.setFill(color(0));
-
-  // Add the two "child" shapes to the parent group
-  // det her definer hvad den består af
-  alien.addChild(body);
-  alien.addChild(head);
+  frameRate(30);
+  background(150);
 }
 
-void draw() {
-  //giver farve til bagrund
-  background(204);
-scale(s);
-  alien.translate(circleX,  circleY);
-  shape(alien); // Draw the group
+void draw() { 
+  clear(); 
+  background(150);      
+  s= s * zoomfacktor;
+  float ballwalk =  sin(ballX*0.5)*10; //svingning på +10 til -10 pixels 
 
-  // BEVÆGLSE AF BOLDEN
+  ballX         += speedX;    //flytter min bold 
+  ballY         += speedY + ballwalk; //ball walk  gøre at der kommer en svingning på +10 til -10 pixels så den tilføjer vi til y verdien
 
-    s= s * 1.1;
-    
-    if(circleY == 1){
-      circleX = 1;
- circleY = 0;
-    }
-    else
-    {
-      circleX = 0;
- circleY = 1;
-    }
-  //dette definer størrelse på alien været rundte 
-  scale(s);
-  
-  // dettte tegner alienen været rundte og bestemmer hvor den skal være 
-  alien.translate(circleX, circleY);
-  shape(alien); 
+  alien(ballX, ballY, s);
 
-
-// dette gøre alien større
-  s= s * 1.1;
-// det er det der bevæger alien så det ligner den går ned af en trappe
-  if (circleY == 10) {
-    circleX = 10;
-    circleY = 0;
-  } else
-  {
-    circleX = 0;
-    circleY = 10;
+  if (s> 200) { 
+    zoomfacktor = 0.9;
+    speedX = 0;
+    speedY = 0;
   }
+
+  for (int j=0; j<10; ++j) {
+    float y = ballY + j*s + j;
+    for (int i=0; i<10; ++i) {
+      float x = ballX + i*s + i;
+      float d = (int)random(-3, 3);
+      fill(20+(x + y)*0.25, 0, 0);
+      alien(x+d, y+d, 25 );
+    }
+  }
+
+  println(s);
+}
+
+void alien(float x, float y, float rad) {
+  fill(0);
+  ellipse( x, y + rad, rad, rad + (rad*0.5));
+  fill(255);
+  ellipse(x, y, rad, rad);
 }
