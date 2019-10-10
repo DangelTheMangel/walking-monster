@@ -39,7 +39,7 @@ void draw() {
       float x = ballX + i*s + i;
       float d = (int)random(-3, 3);
       fill(20+(x + y)*0.25, 0, 0);
-      alien(x+d, y+d, 25 );
+      alien(x+d, y+d, s );
     }
   }
 
