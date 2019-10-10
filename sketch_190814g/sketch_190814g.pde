@@ -1,7 +1,3 @@
-float s = 25;
-int  ballX             = 0, ballY            = 0;
-int   speedX            = 1, speedY             = 1;
-float zoomfacktor = 1.01;
 
 
 void setup() {
@@ -12,21 +8,14 @@ void setup() {
 
 void draw() { 
   clear(); 
-  background(150);      
   s= s * zoomfacktor;
-  float ballwalk =  sin(ballX*0.5)*10; //svingning på +10 til -10 pixels 
 
-  ballX         += speedX;    //flytter min bold 
-  ballY         += speedY + ballwalk; //ball walk  gøre at der kommer en svingning på +10 til -10 pixels så den tilføjer vi til y verdien
-
-  alien(ballX, ballY, s);
 
   if (s> 200) { 
     zoomfacktor = 0.9;
     speedX = 0;
     speedY = 0;
   }
-
   for (int j=0; j<10; ++j) {
     float y = ballY + j*s + j;
     for (int i=0; i<10; ++i) {
@@ -37,7 +26,6 @@ void draw() {
     }
   }
 
-  println(s);
 }
 
 void alien(float x, float y, float rad) {
